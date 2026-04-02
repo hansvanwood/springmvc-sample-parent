@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影列表 - SpringMVC Quickstart</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 主体布局 */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            border-left: 5px solid #42b983;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* 电影卡片网格 */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .movie-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #42b983;
+        }
+
+        .movie-id {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+
+        .movie-name {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* 加载状态 */
+        .loader {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            grid-column: 1/-1;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">SpringMVC Guide</div>
+    <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="movie.html" class="active">电影</a></li>
+        <li><a href="about.html">关于</a></li>
+    </ul>
+</nav>
+
+<main class="container">
+    <div class="page-header">
+        <h2>正在热映</h2>
+        <p>数据实时同步自后端控制器</p>
+    </div>
+
+    <div id="movie-list" class="movie-grid">
+        <div class="loader">正在调取接口数据...</div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const listContainer = document.getElementById('movie-list');
+
+        // 1. 发起请求
+        fetch('/movies')
+            .then(response => {
+                if (!response.ok) throw new Error('接口请求失败');
+                return response.json();
+            })
+            .then(data => {
+                listContainer.innerHTML = ''; // 清除加载提示
+
+                // 2. 解析 Map 对象 (data 格式为 { "1": "哪吒", "2": "姜子牙" ... })
+                // 使用 Object.entries 可以同时获得 [key, value]
+                Object.entries(data).forEach(([id, name]) => {
+                    const card = document.createElement('div');
+                    card.className = 'movie-card';
+                    card.innerHTML = `
+                            <div class="movie-id">ID: ${id}</div>
+                            <div class="movie-name">${name}</div>
+                        `;
+                    listContainer.appendChild(card);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                listContainer.innerHTML = `<div class="loader" style="color: #e74c3c;">无法加载电影列表，请确认后端项目已运行。</div>`;
+            });
+    });
+</script>
+</body>
+</html>
