@@ -30,6 +30,11 @@
             <scope>runtime</scope>   <!-- 仅在开发运行时生效，不打包进生产 jar -->
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
