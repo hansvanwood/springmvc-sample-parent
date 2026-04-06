@@ -1,0 +1,19 @@
+package com.example.request;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.Data;
+
+/**
+ * 电影评论分页查询请求参数
+ */
+@Data
+public class MovieCommentPageRequest {
+
+    @Min(value = 1, message = "页码最小为1")
+    private Integer pageNum = 1;
+
+    @Min(value = 1, message = "每页条数最小为1")
+    @Max(value = 200, message = "每页条数最大为200")
+    private Integer pageSize = 20;
+}

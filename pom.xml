@@ -21,7 +21,6 @@
         <module>springmvc-03-controller</module>
         <module>springmvc-04-validation</module>
         <module>springmvc-05-response</module>
-        <module>springmvc-06-interceptor</module>
         <module>springmvc-10-practice</module>
     </modules>
 
