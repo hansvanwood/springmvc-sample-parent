@@ -21,7 +21,7 @@ public class MovieController {
     /**
      * @RequestParam 常用属性演示
      */
-    @GetMapping("/api/movies/search")
+    @GetMapping("/search")
     public String searchMovies(// 必传参数：keyword 必须提供，否则返回 400
                                @RequestParam String keyword,
 
