@@ -2,9 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>电影列表 - SpringMVC Quickstart</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" rel="stylesheet">
     <style>
         /* 主体布局 */
         .container {
@@ -81,7 +81,7 @@
     <div class="logo">SpringMVC Guide</div>
     <ul class="nav-links">
         <li><a href="index.html">首页</a></li>
-        <li><a href="movie.html" class="active">电影</a></li>
+        <li><a class="active" href="movie.html">电影</a></li>
         <li><a href="about.html">关于</a></li>
     </ul>
 </nav>
@@ -92,7 +92,7 @@
         <p>数据实时同步自后端控制器</p>
     </div>
 
-    <div id="movie-list" class="movie-grid">
+    <div class="movie-grid" id="movie-list">
         <div class="loader">正在调取接口数据...</div>
     </div>
 </main>
